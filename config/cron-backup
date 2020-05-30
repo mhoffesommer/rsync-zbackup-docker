@@ -1,1 +1,1 @@
-* * * * * root /srv/rsync_backup.py
+0 2 * * * root /srv/rsync_backup.py
