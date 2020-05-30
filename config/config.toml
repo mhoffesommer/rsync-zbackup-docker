@@ -1,0 +1,19 @@
+[config]
+# required
+log_dest    =   '/srv/backup/logs'
+rsync_dest  =   '/srv/backup/rsync'
+zbackup_dest=   '/srv/backup/zbackup'
+# optional
+# ssh         =   'ssh'
+
+[source.1]
+# required
+id          =   'dev2.vlx'
+host        =   'dev2.vlx.tech'
+ssh_key     =   'id_rsa_dev2_vlx'
+path        =   '/etc'
+
+# optional
+# port        =   23
+# user        =   'root'
+# exclude     =   'exclude.txt'
