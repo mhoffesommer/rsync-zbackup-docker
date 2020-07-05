@@ -2,7 +2,6 @@
 # required
 log_dest    =   '/srv/backup/logs'
 rsync_dest  =   '/srv/backup/rsync'
-zbackup_dest=   '/srv/backup/zbackup'
 # optional
 # ssh         =   'ssh'
 
