@@ -47,24 +47,11 @@ with open(cfg.config.log_dest+now.strftime(r"/backup-%Y%m%d-%H%M%S.log"),'w') as
 
             log.flush()
             rsync=subprocess.run(args,stdout=log,stderr=subprocess.STDOUT)
-            if rsync.returncode:
+            if rsync.returncode and rsync.returncode!=24: # 24: vanished source files
                 print("***** failed, return code",rsync.returncode,file=log)
                 continue
 
             print('----- rsync successful',file=log)
-
-            zbdest='{0}/{1}'.format(cfg.config.zbackup_dest,src.id)
-            if not os.path.isfile(zbdest+'/info'):
-                os.makedirs(zbdest,exist_ok=True)
-                subprocess.run(['zbackup','init','--non-encrypted',zbdest],check=True)
-
-            zb=subprocess.run("tar -c {0} | zbackup backup --silent --non-encrypted {1}".format(dest,zbdest+'/backups/'+now.strftime(r"backup-%Y%m%d-%H%M%S")),shell=True,stdout=log,stderr=subprocess.STDOUT)
-            if zb.returncode:
-                print("***** failed, return code",zb.returncode,file=log)
-                continue
-
-            print('----- zbackup successful',file=log)
-            print('OK')
 
         except Exception as e:
             print("*****",e,file=log)
